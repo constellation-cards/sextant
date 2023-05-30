@@ -3,12 +3,20 @@ extern crate rocket;
 #[macro_use]
 extern crate serde_json;
 
+use handlebars::Handlebars;
+use rocket::State;
+
 mod templates;
 
-#[post("/", format = "json")]
-fn get_latex() -> String {
-    let reg = templates::create_templates();
-    let result = reg.render("standard", &json!({"name": "foo"}));
+struct ServiceState<'a> {
+    registry: Handlebars<'a>,
+}
+
+#[post("/latex/<template>", format = "json")]
+fn get_latex(service_state: &State<ServiceState>, template: &str) -> String {
+    let result = service_state
+        .registry
+        .render(template, &json!({"name": "foo"}));
     match result {
         Ok(s) => String::from(s),
         Err(_) => "Error".to_string(),
@@ -17,5 +25,9 @@ fn get_latex() -> String {
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![get_latex])
+    let reg: handlebars::Handlebars = templates::create_templates();
+
+    rocket::build()
+        .manage(ServiceState { registry: reg })
+        .mount("/", routes![get_latex])
 }
