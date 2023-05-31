@@ -1,10 +1,8 @@
 #[macro_use]
 extern crate rocket;
-#[macro_use]
-extern crate serde_json;
 
 use handlebars::Handlebars;
-use rocket::{serde::json::Json, State};
+use rocket::State;
 use serde_json::Value;
 
 mod templates;
@@ -13,14 +11,12 @@ struct ServiceState<'a> {
     registry: Handlebars<'a>,
 }
 
-// TODO: send JSON data to Handlebars
-#[post("/latex/<template>", format = "json", data = "<cards>")]
-fn get_latex(service_state: &State<ServiceState>, template: &str, cards: Json<Value>) -> String {
-    let result = service_state
-        .registry
-        .render(template, &json!({"name": "foo"}));
+#[post("/latex/<template>", format = "json", data = "<body>")]
+fn get_latex(service_state: &State<ServiceState>, template: &str, body: &str) -> String {
+    let cards: Value = serde_json::from_str(body).unwrap();
 
-    dbg!(cards);
+    let result = service_state.registry.render(template, &cards);
+
     // TODO: return 400 type status on error
 
     match result {
