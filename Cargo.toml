@@ -9,3 +9,7 @@ edition = "2021"
 rocket = { version = "=0.5.0-rc.3", features = ["json"]}
 serde_json = "=1.0.96"
 upon = "0.8.0"
+
+[[bin]]
+name = "sextant"
+path = "src/main.rs"
