@@ -1,0 +1,9 @@
+[global.limits]
+bytes = "10 MiB"
+"data-form" = "10 MiB"
+file = "10 MiB"
+form = "10 MiB"
+json = "10 MiB"
+msgpack = "10 MiB"
+"file/jpg" = "10 MiB"
+string = "10 MiB"
