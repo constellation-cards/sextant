@@ -5,15 +5,16 @@
 % - bleeding area is 4.25" x 6.25"
 
 \documentclass{article}
-\usepackage[paperwidth=4in, paperheight=6in, top=0.25in, bottom=0.25in, left=0.25in, right=0.25in]{geometry}
+\usepackage[paperwidth=4.25in, paperheight=6.25in, margin=0.5in]{geometry}
 
-% Font: 14 point Georgia
+% Font: 13 point Georgia
 % TODO: what's our title vs. body font choices?
 \usepackage{fontspec}
 \defaultfontfeatures{Ligatures=TeX}
-\setmainfont{Georgia}[SizeFeatures={Size=14}]
+\setmainfont{Georgia}[SizeFeatures={Size=13}]
 
-% Don't number sections
+% Don't number pages or sections
+\pagestyle{empty}
 \setcounter{secnumdepth}{0}
 
 % Don't indent paragraphs
@@ -45,6 +46,7 @@
 \textbf{<= card.stack.name =>}
 \end{center}
 
+\sloppy
 <= card.front.description | replace: "\n", "\n\n" =>
 
 << if card.front.prompts >>
@@ -54,6 +56,7 @@
 << endfor >>
 \end{itemize}
 << endif >>
+\fussy
 
 \vfill
 
@@ -71,6 +74,7 @@
 \textbf{<= card.stack.name =>}
 \end{center}
 
+\sloppy
 <= card.back.description | replace: "\n", "\n\n" =>
 
 << if card.back.prompts >>
@@ -80,6 +84,7 @@
 << endfor >>
 \end{itemize}
 << endif >>
+\fussy
 
 \vfill
 
