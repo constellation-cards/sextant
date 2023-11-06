@@ -13,13 +13,17 @@ struct ServiceState<'a> {
 
 #[post("/latex/<template>", format = "json", data = "<body>")]
 fn get_latex(service_state: &State<ServiceState>, template: &str, body: &str) -> String {
-    let cards: Value = serde_json::from_str(body).unwrap();
+    let cards: Value = match serde_json::from_str(body) {
+        Ok(json) => json,
+        Err(e) => return e.to_string(),
+    };
 
-    let result = service_state
-        .registry
-        .template(template)
-        .render(&cards)
-        .to_string();
+    let template = match service_state.registry.get_template(template) {
+        None => return String::from("No such template"),
+        Some(template) => template,
+    };
+
+    let result = template.render(&cards).to_string();
 
     // TODO: return 400 type status on error
 
