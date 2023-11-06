@@ -50,7 +50,7 @@
 \end{center}
 
 \sloppy
-<= card.front.description | replace: "\n", "\n\n" =>
+<= card.front.description | description =>
 
 << if card.front.prompts >>
 \begin{itemize}
@@ -78,7 +78,7 @@
 \end{center}
 
 \sloppy
-<= card.back.description | replace: "\n", "\n\n" =>
+<= card.back.description | description =>
 
 << if card.back.prompts >>
 \begin{itemize}
