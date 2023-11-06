@@ -33,17 +33,23 @@
 
 \begin{document}
 
+<< for card in cards >>
+
+% Card ID: <= card.id =>
+
 % Front
 
 \begin{center}
-{\fontspec{Georgia}[SizeFeatures={Size=20}]{\underline{<= front.name =>}}}
+{\fontspec{Georgia}[SizeFeatures={Size=20}]{\underline{<= card.front.name =>}}}
+
+\textbf{<= card.stack.name =>}
 \end{center}
 
-<= front.description | replace: "\n", "\n\n" =>
+<= card.front.description | replace: "\n", "\n\n" =>
 
-<< if front.prompts >>
+<< if card.front.prompts >>
 \begin{itemize}
-<< for prompt in front.prompts >>
+<< for prompt in card.front.prompts >>
 \item <= prompt =>
 << endfor >>
 \end{itemize}
@@ -52,9 +58,7 @@
 \vfill
 
 \begin{center}
-\textit{<= front.rule =>}
-
-\textbf{<= stack.name =>}
+\textit{FRONT: <= card.front.rule =>}
 \end{center}
 
 \newpage
@@ -62,14 +66,16 @@
 % Back
 
 \begin{center}
-{\fontspec{Georgia}[SizeFeatures={Size=20}]{\underline{<= back.name =>}}}
+{\fontspec{Georgia}[SizeFeatures={Size=20}]{\underline{<= card.back.name =>}}}
+
+\textbf{<= card.stack.name =>}
 \end{center}
 
-<= back.description | replace: "\n", "\n\n" =>
+<= card.back.description | replace: "\n", "\n\n" =>
 
-<< if back.prompts >>
+<< if card.back.prompts >>
 \begin{itemize}
-<< for prompt in back.prompts >>
+<< for prompt in card.back.prompts >>
 \item <= prompt =>
 << endfor >>
 \end{itemize}
@@ -78,11 +84,11 @@
 \vfill
 
 \begin{center}
-\textit{<= back.rule =>}
-
-\textbf{<= stack.name =>}
+\textit{BACK: <= card.back.rule =>}
 \end{center}
 
 \newpage
+
+<< endfor >>
 
 \end{document}
