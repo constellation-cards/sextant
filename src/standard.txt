@@ -1,1 +1,88 @@
-Hello {{name}}
+% BoardGamesMaker.com 4x6 card template:
+% - full bleed of 2.44" x 2.81" at 300 DPI
+% - safe interior is 3.76" x 5.76"
+% - cut area is 4x6 inches
+% - bleeding area is 4.25" x 6.25"
+
+\documentclass{article}
+\usepackage[paperwidth=4in, paperheight=6in, top=0.25in, bottom=0.25in, left=0.25in, right=0.25in]{geometry}
+
+% Font: 14 point Georgia
+% TODO: what's our title vs. body font choices?
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Georgia}[SizeFeatures={Size=14}]
+
+% Don't number sections
+\setcounter{secnumdepth}{0}
+
+% Don't indent paragraphs
+\setlength{\parindent}{0in}
+
+% Add spacing between paragraphs
+\setlength{\parskip}{6pt plus 4mm minus 3mm}
+
+% Don't add margins to lists
+\usepackage{enumitem}
+\setlist{leftmargin=0.3in, rightmargin=0.3in}
+
+% Graphics support
+\usepackage{graphicx}
+\graphicspath{ {./} }
+\usepackage{tikz}
+
+\begin{document}
+
+% Front
+
+\begin{center}
+{\fontspec{Georgia}[SizeFeatures={Size=20}]{\underline{<= front.name =>}}}
+\end{center}
+
+<= front.description | replace: "\n", "\n\n" =>
+
+<< if front.prompts >>
+\begin{itemize}
+<< for prompt in front.prompts >>
+\item <= prompt =>
+<< endfor >>
+\end{itemize}
+<< endif >>
+
+\vfill
+
+\begin{center}
+\textit{<= front.rule =>}
+
+\textbf{<= stack.name =>}
+\end{center}
+
+\newpage
+
+% Back
+
+\begin{center}
+{\fontspec{Georgia}[SizeFeatures={Size=20}]{\underline{<= back.name =>}}}
+\end{center}
+
+<= back.description | replace: "\n", "\n\n" =>
+
+<< if back.prompts >>
+\begin{itemize}
+<< for prompt in back.prompts >>
+\item <= prompt =>
+<< endfor >>
+\end{itemize}
+<< endif >>
+
+\vfill
+
+\begin{center}
+\textit{<= back.rule =>}
+
+\textbf{<= stack.name =>}
+\end{center}
+
+\newpage
+
+\end{document}

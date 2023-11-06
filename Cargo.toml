@@ -7,5 +7,5 @@ edition = "2021"
 
 [dependencies]
 rocket = { version = "=0.5.0-rc.3", features = ["json"]}
-handlebars = "=4.3.7"
 serde_json = "=1.0.96"
+upon = "0.8.0"
