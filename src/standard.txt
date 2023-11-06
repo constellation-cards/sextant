@@ -1,3 +1,5 @@
+%!TeX program = xelatex
+
 % BoardGamesMaker.com 4x6 card template:
 % - full bleed of 2.44" x 2.81" at 300 DPI
 % - safe interior is 3.76" x 5.76"
@@ -11,7 +13,7 @@
 % TODO: what's our title vs. body font choices?
 \usepackage{fontspec}
 \defaultfontfeatures{Ligatures=TeX}
-\setmainfont{Georgia}[SizeFeatures={Size=13}]
+\setmainfont{Georgia}[SizeFeatures={Size=12}]
 
 % Don't number pages or sections
 \pagestyle{empty}
@@ -21,7 +23,8 @@
 \setlength{\parindent}{0in}
 
 % Add spacing between paragraphs
-\setlength{\parskip}{6pt plus 4mm minus 3mm}
+\setlength{\parskip}{4pt}
+% 6pt plus 4mm minus 3mm
 
 % Don't add margins to lists
 \usepackage{enumitem}
