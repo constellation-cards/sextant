@@ -39,8 +39,6 @@
 
 << for card in cards >>
 
-% Card ID: <= card.id =>
-
 % Front
 
 \begin{center}

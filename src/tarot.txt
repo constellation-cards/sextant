@@ -1,0 +1,55 @@
+\environment env_cards
+
+\starttext
+
+\tolerance 9999
+\emergencystretch 3em
+\vfuzz\hfuzz
+
+<< for card in cards >>
+
+% Back
+
+\constellationtitle{<= card.back.name =>}
+\constellationstack{<= card.stack.name =>}
+
+<= card.back.description | description =>
+
+<< if card.back.prompts >>
+\startitemize[nowhite]
+<< for prompt in card.back.prompts >>
+\item <= prompt =>
+<< endfor >>
+\stopitemize
+<< endif >>
+
+\vfill
+
+\constellationrule{FRONT: <= card.back.rule =>}
+
+\page
+
+% Front
+
+\constellationtitle{<= card.front.name =>}
+\constellationstack{<= card.stack.name =>}
+
+<= card.front.description | description =>
+
+<< if card.front.prompts >>
+\startitemize[nowhite]
+<< for prompt in card.front.prompts >>
+\item <= prompt =>
+<< endfor >>
+\stopitemize
+<< endif >>
+
+\vfill
+
+\constellationrule{FRONT: <= card.front.rule =>}
+
+\page
+
+<< endfor >>
+
+\stoptext

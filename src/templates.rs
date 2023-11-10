@@ -7,6 +7,9 @@ pub fn create_templates() -> Engine<'static> {
     engine
         .add_template("standard", include_str!("standard.txt"))
         .expect("Unable to add standard.txt template");
+    engine
+        .add_template("tarot", include_str!("tarot.txt"))
+        .expect("Unable to add tarot.txt template");
 
     engine.add_filter("replace", |a: &str, b: &str, c: &str| str::replace(a, b, c));
 
@@ -15,7 +18,7 @@ pub fn create_templates() -> Engine<'static> {
         for line in desc.lines() {
             match line.strip_prefix("//") {
                 Some(line) => {
-                    s.push_str("\\textit{");
+                    s.push_str("\\constellationquote{");
                     s.push_str(line);
                     s.push('}');
                 }
