@@ -25,7 +25,7 @@
 
 \vfill
 
-\constellationrule{FRONT: <= card.back.rule =>}
+\constellationrule{BACK: <= card.back.rule =>}
 
 \page
 
